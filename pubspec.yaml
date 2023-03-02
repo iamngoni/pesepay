@@ -1,0 +1,13 @@
+name: pesepay
+description: Pesepay helps businesses in Africa get paid by anyone, anywhere in the world
+version: 0.1.0+1
+homepage: https://github.com/iamngoni/pesepay
+
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dev_dependencies:
+  mocktail: ^0.3.0
+  test: ^1.19.2
+  very_good_analysis: ^4.0.0
