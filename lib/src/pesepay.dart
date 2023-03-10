@@ -51,8 +51,9 @@ class Pesepay {
           },
         ),
       );
-      final String payload = response.data!['payload'] as String;
-      final String decryptedPayload = Pesepay.decrypt(encryptionKey, payload);
+      final String responsePayload = response.data!['payload'] as String;
+      final String decryptedPayload =
+          Pesepay.decrypt(encryptionKey, responsePayload);
       log('${json.decode(decryptedPayload)}');
     } on DioError catch (e) {
       throw PesepayException('${e.message}');
