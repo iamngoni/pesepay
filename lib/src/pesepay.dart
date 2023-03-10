@@ -3,11 +3,11 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
-import 'package:pesepay/src/models/currency.dart';
-import 'package:pesepay/src/utils/api_config.dart';
-import 'package:pesepay/src/utils/pesepay_exception.dart';
 
+import 'models/currency.dart';
 import 'models/payment.dart';
+import 'utils/api_config.dart';
+import 'utils/pesepay_exception.dart';
 
 /// A simple library that wraps Pesepay payment gateway functionalities for
 /// the purposes of simplicity and accessibility for developers.
@@ -16,6 +16,19 @@ import 'models/payment.dart';
 /// payments to be made through the internet
 
 class Pesepay {
+  /// Instantiate the Pesepay class that can be used to perform transactions
+  /// and other functionalities offered by Pesepay (https://pesepay.com)
+  ///
+  /// It can be instantiated in this way:
+  ///
+  /// ```dart
+  /// final pesepay = Pesepay(
+  ///   integrationKey: '',
+  ///   encryptionKey: '',
+  ///   resultUrl: '',
+  ///   returnUrl: ''
+  /// )
+  /// ```
   Pesepay({
     required this.integrationKey,
     required this.encryptionKey,
@@ -23,9 +36,20 @@ class Pesepay {
     this.returnUrl,
   });
 
+  /// This can be retrieved from the Pesepay Dashboard
+  /// http://dashboard.pesepay.com/
   final String integrationKey;
+
+  /// This can be retrieved from the Pesepay Dashboard
+  /// http://dashboard.pesepay.com/
   final String encryptionKey;
+
+  /// Result URL - HTTP callback endpoint on your server for receiving event
+  /// notifications
   final String? resultUrl;
+
+  /// Return URL redirects users back to the originating page during a checkout
+  /// flow
   final String? returnUrl;
 
   final Dio _dio = Dio()..options.baseUrl = ApiConfig.baseUrl;
@@ -65,15 +89,15 @@ class Pesepay {
   static Future<List<Currency>> getActiveCurrencies() async {
     try {
       final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
-      final Response<Map<String, dynamic>> response =
+      final Response<List<dynamic>> response =
           await staticDio.get('/currencies/active');
-      final List<Currency> currencies =
-          (response.data! as List<Map<String, dynamic>>)
-              .map<Currency>(Currency.fromJson)
-              .toList();
+      final List<Currency> currencies = (response.data!)
+          .map<Currency>(
+              (json) => Currency.fromJson(json as Map<String, dynamic>))
+          .toList();
       return currencies;
-    } on DioError catch (e) {
-      throw PesepayException('${e.message}');
+    } on DioError catch (e, s) {
+      throw PesepayException(e.toString(), stackTrace: s);
     } catch (e, s) {
       throw PesepayException('Pesepay runtime exception', stackTrace: s);
     }
