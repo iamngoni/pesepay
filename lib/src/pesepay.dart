@@ -56,6 +56,7 @@ class Pesepay {
   /// Show logs
   final bool verbose;
 
+  /// Initiate web based payment
   Future<PesepayResponse<InitPaymentResponse>> initiateTransaction(
     Transaction transaction,
   ) async {

@@ -8,5 +8,6 @@
 
 export 'amount.dart';
 export 'currency.dart';
+export 'init_payment_response.dart';
 export 'pesepay_response.dart';
 export 'transaction.dart';

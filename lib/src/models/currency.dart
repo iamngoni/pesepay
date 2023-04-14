@@ -9,6 +9,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'currency.freezed.dart';
+part 'currency.g.dart';
 
 @freezed
 class Currency with _$Currency {

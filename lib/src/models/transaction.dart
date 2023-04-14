@@ -7,11 +7,11 @@
 //
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 import 'amount.dart';
 
 part 'transaction.freezed.dart';
+part 'transaction.g.dart';
 
 @freezed
 class Transaction with _$Transaction {

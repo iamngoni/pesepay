@@ -9,6 +9,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'init_payment_response.freezed.dart';
+part 'init_payment_response.g.dart';
 
 @freezed
 class InitPaymentResponse with _$InitPaymentResponse {
