@@ -8,12 +8,20 @@
 
 class PesepayException implements Exception {
   const PesepayException(this.message, {this.code, this.stackTrace});
+
+  factory PesepayException.unknown(Object? e) =>
+      PesepayException('Unknown Exception: $e');
+
   final String message;
   final String? code;
   final StackTrace? stackTrace;
 
   @override
   String toString() {
-    return 'PesepayException ($code): $message)';
+    String exc = 'PesepayException ($code): $message)';
+    if (stackTrace != null) {
+      exc += '\n$stackTrace';
+    }
+    return exc;
   }
 }

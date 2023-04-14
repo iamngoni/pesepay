@@ -4,10 +4,10 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
 
-import 'models/currency.dart';
-import 'models/payment.dart';
-import 'utils/api_config.dart';
-import 'utils/pesepay_exception.dart';
+import 'models/init_payment_response.dart';
+import 'models/models.dart';
+import 'utils/dio_error_to_pesepay_exception.dart';
+import 'utils/utils.dart';
 
 /// A simple library that wraps Pesepay payment gateway functionalities for
 /// the purposes of simplicity and accessibility for developers.
@@ -34,6 +34,7 @@ class Pesepay {
     required this.encryptionKey,
     this.resultUrl,
     this.returnUrl,
+    this.verbose = false,
   });
 
   /// This can be retrieved from the Pesepay Dashboard
@@ -52,50 +53,82 @@ class Pesepay {
   /// flow
   final String? returnUrl;
 
-  final Dio _dio = Dio()..options.baseUrl = ApiConfig.baseUrl;
+  /// Show logs
+  final bool verbose;
 
-  Future<void> initiateTransaction(Payment payment) async {
-    final Map<String, dynamic> paymentData = payment.toJson()
-      ..addAll({
-        'returnUrl': returnUrl,
-        'resultUrl': resultUrl,
-      });
+  Future<PesepayResponse<InitPaymentResponse>> initiateTransaction(
+    Transaction transaction,
+  ) async {
+    if (resultUrl == null) {
+      throw const PesepayException('Result URL has not been specified');
+    }
 
-    final String payload =
+    if (returnUrl == null) {
+      throw const PesepayException('Return URL has not been specified');
+    }
+
+    final Transaction _t = transaction.copyWith(
+      resultUrl: '$resultUrl',
+      returnUrl: '$returnUrl',
+    );
+
+    final Map<String, dynamic> paymentData = _t.toJson();
+
+    final String data =
         Pesepay.encrypt(encryptionKey, json.encode(paymentData));
 
     try {
-      final Response<Map<String, dynamic>> response = await _dio.post(
-        '/payments/initiate',
-        data: {'payload': payload},
+      final Dio dio = Dio();
+
+      if (verbose) {
+        dio.interceptors.add(
+          LogInterceptor(responseBody: true, requestBody: true),
+        );
+      }
+
+      final Response<Map<String, dynamic>> response = await dio.post(
+        ApiConfig.initiatePaymentUrl,
+        data: {'payload': data},
         options: Options(
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': integrationKey,
+            'key': integrationKey,
           },
         ),
       );
-      final String responsePayload = response.data!['payload'] as String;
-      final String decryptedPayload =
-          Pesepay.decrypt(encryptionKey, responsePayload);
-      log('${json.decode(decryptedPayload)}');
-    } on DioError catch (e) {
-      throw PesepayException('${e.message}');
+      final String payload = response.data!['payload'] as String;
+      final String decryptedPayload = Pesepay.decrypt(encryptionKey, payload);
+      return PesepayResponse(
+        status: true,
+        message: 'Success',
+        data: InitPaymentResponse.fromJson(
+          json.decode(decryptedPayload) as Map<String, dynamic>,
+        ),
+      );
+    } on DioError catch (e, s) {
+      throw dioErrorToPesepayException(e, s);
     } catch (e, s) {
-      throw PesepayException('Pesepay runtime exception', stackTrace: s);
+      throw PesepayException(e.toString(), stackTrace: s);
     }
   }
 
-  static Future<List<Currency>> getActiveCurrencies() async {
+  static Future<PesepayResponse<List<Currency>>> getActiveCurrencies() async {
     try {
+      log('Fetching active currencies ...');
       final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
       final Response<List<dynamic>> response =
           await staticDio.get('/currencies/active');
       final List<Currency> currencies = (response.data!)
           .map<Currency>(
-              (json) => Currency.fromJson(json as Map<String, dynamic>))
+            (json) => Currency.fromJson(json as Map<String, dynamic>),
+          )
           .toList();
-      return currencies;
+
+      return PesepayResponse(
+        status: true,
+        message: 'Success',
+        data: currencies,
+      );
     } on DioError catch (e, s) {
       throw PesepayException(e.toString(), stackTrace: s);
     } catch (e, s) {

@@ -19,3 +19,4 @@ linter:
     prefer_relative_imports: true
     always_use_package_imports: false
     avoid_setters_without_getters: false
+    public_member_api_docs: false
