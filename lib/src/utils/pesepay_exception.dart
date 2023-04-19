@@ -25,3 +25,7 @@ class PesepayException implements Exception {
     return exc;
   }
 }
+
+class InvalidRequestException extends PesepayException {
+  InvalidRequestException(super.message);
+}

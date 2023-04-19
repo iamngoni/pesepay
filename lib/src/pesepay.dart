@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:encrypt/encrypt.dart';
+import 'package:localregex/localregex.dart';
 
-import 'models/init_payment_response.dart';
 import 'models/models.dart';
 import 'utils/dio_error_to_pesepay_exception.dart';
 import 'utils/utils.dart';
@@ -34,8 +34,7 @@ class Pesepay {
     required this.encryptionKey,
     this.resultUrl,
     this.returnUrl,
-    this.verbose = false,
-  });
+  }) : _dio = Dio();
 
   /// This can be retrieved from the Pesepay Dashboard
   /// http://dashboard.pesepay.com/
@@ -53,41 +52,38 @@ class Pesepay {
   /// flow
   final String? returnUrl;
 
-  /// Show logs
-  final bool verbose;
+  final Dio _dio;
 
   /// Initiate web based payment
-  Future<PesepayResponse<InitPaymentResponse>> initiateTransaction(
+  Future<TransactionResponse> initiateWebTransaction(
     Transaction transaction,
   ) async {
     if (resultUrl == null) {
-      throw const PesepayException('Result URL has not been specified');
+      throw InvalidRequestException('Result URL has not been specified');
     }
 
     if (returnUrl == null) {
-      throw const PesepayException('Return URL has not been specified');
+      throw InvalidRequestException('Return URL has not been specified');
     }
 
-    final Transaction _t = transaction.copyWith(
+    return _initWebTransaction(transaction);
+  }
+
+  /// Returns [TransactionResponse]
+  Future<TransactionResponse> _initWebTransaction(
+    Transaction transaction,
+  ) async {
+    final Transaction t = transaction.copyWith(
       resultUrl: '$resultUrl',
       returnUrl: '$returnUrl',
     );
 
-    final Map<String, dynamic> paymentData = _t.toJson();
+    final Map<String, dynamic> paymentData = t.toJson();
 
-    final String data =
-        Pesepay.encrypt(encryptionKey, json.encode(paymentData));
+    final String data = _encrypt(encryptionKey, json.encode(paymentData));
 
     try {
-      final Dio dio = Dio();
-
-      if (verbose) {
-        dio.interceptors.add(
-          LogInterceptor(responseBody: true, requestBody: true),
-        );
-      }
-
-      final Response<Map<String, dynamic>> response = await dio.post(
+      final Response<Map<String, dynamic>> response = await _dio.post(
         ApiConfig.initiatePaymentUrl,
         data: {'payload': data},
         options: Options(
@@ -97,14 +93,13 @@ class Pesepay {
           },
         ),
       );
+
       final String payload = response.data!['payload'] as String;
-      final String decryptedPayload = Pesepay.decrypt(encryptionKey, payload);
-      return PesepayResponse(
-        status: true,
-        message: 'Success',
-        data: InitPaymentResponse.fromJson(
-          json.decode(decryptedPayload) as Map<String, dynamic>,
-        ),
+      // ignore: no_leading_underscores_for_local_identifiers
+      final String _payload = _decrypt(encryptionKey, payload);
+
+      return TransactionResponse.fromJson(
+        json.decode(_payload) as Map<String, dynamic>,
       );
     } on DioError catch (e, s) {
       throw dioErrorToPesepayException(e, s);
@@ -113,7 +108,137 @@ class Pesepay {
     }
   }
 
-  static Future<PesepayResponse<List<Currency>>> getActiveCurrencies() async {
+  /// Initiate mobile based payment
+  Future<TransactionResponse> initiateSeamlessTransaction(
+    SeamlessTransaction transaction,
+  ) async {
+    if (returnUrl == null) {
+      throw InvalidRequestException('Return URL has not been specified');
+    }
+
+    return _initSeamlessTransaction(transaction);
+  }
+
+  /// Returns [TransactionResponse]
+  Future<TransactionResponse> _initSeamlessTransaction(
+    SeamlessTransaction transaction,
+  ) async {
+    final SeamlessTransaction t = transaction.copyWith(
+      resultUrl: resultUrl ?? '',
+      returnUrl: returnUrl ?? '',
+    );
+
+    final Map<String, dynamic> paymentData = t.toJson();
+
+    final String data = _encrypt(encryptionKey, json.encode(paymentData));
+
+    try {
+      final Response<Map<String, dynamic>> response = await _dio.post(
+        ApiConfig.seamlessPaymentUrl,
+        data: {'payload': data},
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'key': integrationKey,
+          },
+        ),
+      );
+
+      final String payload = response.data!['payload'] as String;
+      // ignore: no_leading_underscores_for_local_identifiers
+      final String _payload = _decrypt(encryptionKey, payload);
+
+      return TransactionResponse.fromJson(
+        json.decode(_payload) as Map<String, dynamic>,
+      );
+    } on DioError catch (e, s) {
+      throw dioErrorToPesepayException(e, s);
+    } catch (e, s) {
+      throw PesepayException(e.toString(), stackTrace: s);
+    }
+  }
+
+  SeamlessTransaction createSeamlessTransaction({
+    required String customerName,
+    required String customerEmail,
+    required String customerPhone,
+    required double amount,
+    required String currencyCode,
+    required String transactionDescription,
+    required String transactionReference,
+    required String paymentMethodCode,
+  }) {
+    if (!LocalRegex.isEmail(customerEmail)) {
+      throw const PesepayException('Customer email is invalid');
+    }
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    final Amount _amount = Amount(
+      amount: amount,
+      currency: currencyCode,
+    );
+
+    final Customer customer = Customer(
+      name: customerName,
+      email: customerEmail,
+      phoneNumber: customerPhone,
+    );
+
+    return SeamlessTransaction(
+      amount: _amount,
+      description: transactionDescription,
+      reference: transactionReference,
+      paymentMethod: paymentMethodCode,
+      customer: customer,
+    );
+  }
+
+  Transaction createTransaction({
+    required double amount,
+    required String currencyCode,
+    required String transactionDescription,
+    required String transactionReference,
+  }) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    final Amount _amount = Amount(
+      amount: amount,
+      currency: currencyCode,
+    );
+
+    return Transaction(
+      amount: _amount,
+      description: transactionDescription,
+      reference: transactionReference,
+    );
+  }
+
+  Future<TransactionResponse> checkTransactionStatus(String pollUrl) async {
+    try {
+      final Response<Map<String, dynamic>> response = await _dio.get(
+        pollUrl,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'key': integrationKey,
+          },
+        ),
+      );
+
+      final String payload = response.data!['payload'] as String;
+      // ignore: no_leading_underscores_for_local_identifiers
+      final String _payload = _decrypt(encryptionKey, payload);
+
+      return TransactionResponse.fromJson(
+        json.decode(_payload) as Map<String, dynamic>,
+      );
+    } on DioError catch (e, s) {
+      throw dioErrorToPesepayException(e, s);
+    } catch (e, s) {
+      throw PesepayException(e.toString(), stackTrace: s);
+    }
+  }
+
+  static Future<List<Currency>> getActiveCurrencies() async {
     try {
       log('Fetching active currencies ...');
       final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
@@ -125,11 +250,7 @@ class Pesepay {
           )
           .toList();
 
-      return PesepayResponse(
-        status: true,
-        message: 'Success',
-        data: currencies,
-      );
+      return currencies;
     } on DioError catch (e, s) {
       throw PesepayException(e.toString(), stackTrace: s);
     } catch (e, s) {
@@ -138,7 +259,7 @@ class Pesepay {
   }
 
   /// Encrypt the payload
-  static String encrypt(String encryptionKey, String payload) {
+  String _encrypt(String encryptionKey, String payload) {
     final Key key = Key.fromUtf8(encryptionKey);
     final IV iv = IV.fromUtf8(encryptionKey.substring(0, 16));
     final Encrypter encrypter = Encrypter(AES(key, mode: AESMode.cbc));
@@ -146,10 +267,10 @@ class Pesepay {
   }
 
   /// Decrypt the payload
-  static String decrypt(String encryptionKey, String encryptedPayload) {
+  String _decrypt(String encryptionKey, String payload) {
     final Key key = Key.fromUtf8(encryptionKey);
     final IV iv = IV.fromUtf8(encryptionKey.substring(0, 16));
     final Encrypter encrypter = Encrypter(AES(key, mode: AESMode.cbc));
-    return encrypter.decrypt(Encrypted.fromBase64(encryptedPayload), iv: iv);
+    return encrypter.decrypt(Encrypted.fromBase64(payload), iv: iv);
   }
 }

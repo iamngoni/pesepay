@@ -20,12 +20,27 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Transaction {
-  Amount get amountDetails => throw _privateConstructorUsedError;
+  /// Amount in value and currency
+  @JsonKey(name: 'amountDetails')
+  Amount get amount => throw _privateConstructorUsedError;
+
+  /// Reason for payment
   @JsonKey(name: 'reasonForPayment')
-  String get reason => throw _privateConstructorUsedError;
-  String? get merchantReference => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+
+  /// Reference from the merchant system
+  @JsonKey(name: 'merchantReference')
+  String? get reference => throw _privateConstructorUsedError;
+
+  /// Type of transaction
   String get transactionType => throw _privateConstructorUsedError;
+
+  /// Result URL - HTTP callback endpoint on your server for receiving event
+  /// notifications
   String get resultUrl => throw _privateConstructorUsedError;
+
+  /// Return URL redirects users back to the originating page during a checkout
+  /// flow
   String get returnUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,14 +56,14 @@ abstract class $TransactionCopyWith<$Res> {
       _$TransactionCopyWithImpl<$Res, Transaction>;
   @useResult
   $Res call(
-      {Amount amountDetails,
-      @JsonKey(name: 'reasonForPayment') String reason,
-      String? merchantReference,
+      {@JsonKey(name: 'amountDetails') Amount amount,
+      @JsonKey(name: 'reasonForPayment') String description,
+      @JsonKey(name: 'merchantReference') String? reference,
       String transactionType,
       String resultUrl,
       String returnUrl});
 
-  $AmountCopyWith<$Res> get amountDetails;
+  $AmountCopyWith<$Res> get amount;
 }
 
 /// @nodoc
@@ -64,25 +79,25 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? amountDetails = null,
-    Object? reason = null,
-    Object? merchantReference = freezed,
+    Object? amount = null,
+    Object? description = null,
+    Object? reference = freezed,
     Object? transactionType = null,
     Object? resultUrl = null,
     Object? returnUrl = null,
   }) {
     return _then(_value.copyWith(
-      amountDetails: null == amountDetails
-          ? _value.amountDetails
-          : amountDetails // ignore: cast_nullable_to_non_nullable
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as Amount,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantReference: freezed == merchantReference
-          ? _value.merchantReference
-          : merchantReference // ignore: cast_nullable_to_non_nullable
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
               as String?,
       transactionType: null == transactionType
           ? _value.transactionType
@@ -101,9 +116,9 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
 
   @override
   @pragma('vm:prefer-inline')
-  $AmountCopyWith<$Res> get amountDetails {
-    return $AmountCopyWith<$Res>(_value.amountDetails, (value) {
-      return _then(_value.copyWith(amountDetails: value) as $Val);
+  $AmountCopyWith<$Res> get amount {
+    return $AmountCopyWith<$Res>(_value.amount, (value) {
+      return _then(_value.copyWith(amount: value) as $Val);
     });
   }
 }
@@ -117,15 +132,15 @@ abstract class _$$_TransactionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Amount amountDetails,
-      @JsonKey(name: 'reasonForPayment') String reason,
-      String? merchantReference,
+      {@JsonKey(name: 'amountDetails') Amount amount,
+      @JsonKey(name: 'reasonForPayment') String description,
+      @JsonKey(name: 'merchantReference') String? reference,
       String transactionType,
       String resultUrl,
       String returnUrl});
 
   @override
-  $AmountCopyWith<$Res> get amountDetails;
+  $AmountCopyWith<$Res> get amount;
 }
 
 /// @nodoc
@@ -139,25 +154,25 @@ class __$$_TransactionCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? amountDetails = null,
-    Object? reason = null,
-    Object? merchantReference = freezed,
+    Object? amount = null,
+    Object? description = null,
+    Object? reference = freezed,
     Object? transactionType = null,
     Object? resultUrl = null,
     Object? returnUrl = null,
   }) {
     return _then(_$_Transaction(
-      amountDetails: null == amountDetails
-          ? _value.amountDetails
-          : amountDetails // ignore: cast_nullable_to_non_nullable
+      amount: null == amount
+          ? _value.amount
+          : amount // ignore: cast_nullable_to_non_nullable
               as Amount,
-      reason: null == reason
-          ? _value.reason
-          : reason // ignore: cast_nullable_to_non_nullable
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
               as String,
-      merchantReference: freezed == merchantReference
-          ? _value.merchantReference
-          : merchantReference // ignore: cast_nullable_to_non_nullable
+      reference: freezed == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
               as String?,
       transactionType: null == transactionType
           ? _value.transactionType
@@ -179,9 +194,9 @@ class __$$_TransactionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Transaction extends _Transaction {
   const _$_Transaction(
-      {required this.amountDetails,
-      @JsonKey(name: 'reasonForPayment') required this.reason,
-      this.merchantReference,
+      {@JsonKey(name: 'amountDetails') required this.amount,
+      @JsonKey(name: 'reasonForPayment') required this.description,
+      @JsonKey(name: 'merchantReference') this.reference,
       this.transactionType = 'BASIC',
       this.resultUrl = '',
       this.returnUrl = ''})
@@ -190,26 +205,41 @@ class _$_Transaction extends _Transaction {
   factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
       _$$_TransactionFromJson(json);
 
+  /// Amount in value and currency
   @override
-  final Amount amountDetails;
+  @JsonKey(name: 'amountDetails')
+  final Amount amount;
+
+  /// Reason for payment
   @override
   @JsonKey(name: 'reasonForPayment')
-  final String reason;
+  final String description;
+
+  /// Reference from the merchant system
   @override
-  final String? merchantReference;
+  @JsonKey(name: 'merchantReference')
+  final String? reference;
+
+  /// Type of transaction
   @override
   @JsonKey()
   final String transactionType;
+
+  /// Result URL - HTTP callback endpoint on your server for receiving event
+  /// notifications
   @override
   @JsonKey()
   final String resultUrl;
+
+  /// Return URL redirects users back to the originating page during a checkout
+  /// flow
   @override
   @JsonKey()
   final String returnUrl;
 
   @override
   String toString() {
-    return 'Transaction(amountDetails: $amountDetails, reason: $reason, merchantReference: $merchantReference, transactionType: $transactionType, resultUrl: $resultUrl, returnUrl: $returnUrl)';
+    return 'Transaction(amount: $amount, description: $description, reference: $reference, transactionType: $transactionType, resultUrl: $resultUrl, returnUrl: $returnUrl)';
   }
 
   @override
@@ -217,11 +247,11 @@ class _$_Transaction extends _Transaction {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Transaction &&
-            (identical(other.amountDetails, amountDetails) ||
-                other.amountDetails == amountDetails) &&
-            (identical(other.reason, reason) || other.reason == reason) &&
-            (identical(other.merchantReference, merchantReference) ||
-                other.merchantReference == merchantReference) &&
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.reference, reference) ||
+                other.reference == reference) &&
             (identical(other.transactionType, transactionType) ||
                 other.transactionType == transactionType) &&
             (identical(other.resultUrl, resultUrl) ||
@@ -232,8 +262,8 @@ class _$_Transaction extends _Transaction {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, amountDetails, reason,
-      merchantReference, transactionType, resultUrl, returnUrl);
+  int get hashCode => Object.hash(runtimeType, amount, description, reference,
+      transactionType, resultUrl, returnUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -251,9 +281,9 @@ class _$_Transaction extends _Transaction {
 
 abstract class _Transaction extends Transaction {
   const factory _Transaction(
-      {required final Amount amountDetails,
-      @JsonKey(name: 'reasonForPayment') required final String reason,
-      final String? merchantReference,
+      {@JsonKey(name: 'amountDetails') required final Amount amount,
+      @JsonKey(name: 'reasonForPayment') required final String description,
+      @JsonKey(name: 'merchantReference') final String? reference,
       final String transactionType,
       final String resultUrl,
       final String returnUrl}) = _$_Transaction;
@@ -263,17 +293,33 @@ abstract class _Transaction extends Transaction {
       _$_Transaction.fromJson;
 
   @override
-  Amount get amountDetails;
+
+  /// Amount in value and currency
+  @JsonKey(name: 'amountDetails')
+  Amount get amount;
   @override
+
+  /// Reason for payment
   @JsonKey(name: 'reasonForPayment')
-  String get reason;
+  String get description;
   @override
-  String? get merchantReference;
+
+  /// Reference from the merchant system
+  @JsonKey(name: 'merchantReference')
+  String? get reference;
   @override
+
+  /// Type of transaction
   String get transactionType;
   @override
+
+  /// Result URL - HTTP callback endpoint on your server for receiving event
+  /// notifications
   String get resultUrl;
   @override
+
+  /// Return URL redirects users back to the originating page during a checkout
+  /// flow
   String get returnUrl;
   @override
   @JsonKey(ignore: true)

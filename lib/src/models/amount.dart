@@ -13,8 +13,12 @@ part 'amount.g.dart';
 
 @freezed
 class Amount with _$Amount {
+  /// Create amount details instance
   const factory Amount({
+    /// The amount figure in $
     required double amount,
+
+    /// Currency specification e.g. ZWL
     @JsonKey(name: 'currencyCode') required String currency,
   }) = _Amount;
 

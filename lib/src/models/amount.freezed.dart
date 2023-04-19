@@ -20,7 +20,10 @@ Amount _$AmountFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Amount {
+  /// The amount figure in $
   double get amount => throw _privateConstructorUsedError;
+
+  /// Currency specification e.g. ZWL
   @JsonKey(name: 'currencyCode')
   String get currency => throw _privateConstructorUsedError;
 
@@ -112,8 +115,11 @@ class _$_Amount extends _Amount {
   factory _$_Amount.fromJson(Map<String, dynamic> json) =>
       _$$_AmountFromJson(json);
 
+  /// The amount figure in $
   @override
   final double amount;
+
+  /// Currency specification e.g. ZWL
   @override
   @JsonKey(name: 'currencyCode')
   final String currency;
@@ -161,8 +167,12 @@ abstract class _Amount extends Amount {
   factory _Amount.fromJson(Map<String, dynamic> json) = _$_Amount.fromJson;
 
   @override
+
+  /// The amount figure in $
   double get amount;
   @override
+
+  /// Currency specification e.g. ZWL
   @JsonKey(name: 'currencyCode')
   String get currency;
   @override

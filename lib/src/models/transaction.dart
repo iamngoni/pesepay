@@ -15,12 +15,26 @@ part 'transaction.g.dart';
 
 @freezed
 class Transaction with _$Transaction {
+  /// Create transaction instance
   const factory Transaction({
-    required Amount amountDetails,
-    @JsonKey(name: 'reasonForPayment') required String reason,
-    String? merchantReference,
+    /// Amount in value and currency
+    @JsonKey(name: 'amountDetails') required Amount amount,
+
+    /// Reason for payment
+    @JsonKey(name: 'reasonForPayment') required String description,
+
+    /// Reference from the merchant system
+    @JsonKey(name: 'merchantReference') String? reference,
+
+    /// Type of transaction
     @Default('BASIC') String transactionType,
+
+    /// Result URL - HTTP callback endpoint on your server for receiving event
+    /// notifications
     @Default('') String resultUrl,
+
+    /// Return URL redirects users back to the originating page during a checkout
+    /// flow
     @Default('') String returnUrl,
   }) = _Transaction;
 
