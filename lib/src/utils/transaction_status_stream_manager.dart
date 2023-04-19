@@ -43,8 +43,7 @@ class TransactionStatusStreamManager {
   final StreamController<TransactionResponse> _transactionStatusController =
       StreamController<TransactionResponse>();
 
-  Stream<TransactionResponse> get transactionStatusStream =>
-      _transactionStatusController.stream;
+  Stream<TransactionResponse> get stream => _transactionStatusController.stream;
 
   void _stream(int streamInterval) {
     _timer = Timer.periodic(
