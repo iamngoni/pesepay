@@ -8,7 +8,7 @@
 
 import 'package:dio/dio.dart';
 
-import '../../pesepay.dart';
+import 'pesepay_exception.dart';
 
 PesepayException dioErrorToPesepayException(
   DioError error,
@@ -28,11 +28,16 @@ PesepayException dioErrorToPesepayException(
 
       break;
     case DioErrorType.badResponse:
-      exception = PesepayException(error.response?.statusMessage ?? '',
-          stackTrace: stackTrace);
+      exception = PesepayException(
+        error.response?.statusMessage ?? 'Bad Response',
+        stackTrace: stackTrace,
+      );
       break;
     case DioErrorType.unknown:
-      exception = PesepayException(error.toString(), stackTrace: stackTrace);
+      exception = PesepayException(
+        'Pesepay is unavailable at the moment',
+        stackTrace: stackTrace,
+      );
       break;
     case DioErrorType.cancel:
       exception = PesepayException('Request Cancelled', stackTrace: stackTrace);

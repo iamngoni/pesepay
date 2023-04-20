@@ -18,12 +18,15 @@ class Transaction with _$Transaction {
   /// Create transaction instance
   const factory Transaction({
     /// Amount in value and currency
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'amountDetails') required Amount amount,
 
     /// Reason for payment
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'reasonForPayment') required String description,
 
     /// Reference from the merchant system
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'merchantReference') String? reference,
 
     /// Type of transaction
@@ -33,8 +36,8 @@ class Transaction with _$Transaction {
     /// notifications
     @Default('') String resultUrl,
 
-    /// Return URL redirects users back to the originating page during a checkout
-    /// flow
+    /// Return URL redirects users back to the originating page during a
+    /// checkout flow
     @Default('') String returnUrl,
   }) = _Transaction;
 

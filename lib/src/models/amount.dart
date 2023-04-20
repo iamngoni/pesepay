@@ -19,6 +19,7 @@ class Amount with _$Amount {
     required double amount,
 
     /// Currency specification e.g. ZWL
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'currencyCode') required String currency,
   }) = _Amount;
 

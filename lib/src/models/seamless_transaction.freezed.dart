@@ -21,26 +21,28 @@ SeamlessTransaction _$SeamlessTransactionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SeamlessTransaction {
   /// Amount in value and currency
+// ignore: invalid_annotation_target
   @JsonKey(name: 'amountDetails')
   Amount get amount => throw _privateConstructorUsedError;
 
   /// Reason for payment
+// ignore: invalid_annotation_target
   @JsonKey(name: 'reasonForPayment')
   String get description => throw _privateConstructorUsedError;
 
   /// Reference from merchant system
+// ignore: invalid_annotation_target
   @JsonKey(name: 'merchantReference')
   String get reference => throw _privateConstructorUsedError;
 
   /// Payment method code
-  @JsonKey(name: 'paymentMethodCode')
-  String get paymentMethod => throw _privateConstructorUsedError;
+  String get paymentMethodCode => throw _privateConstructorUsedError;
 
   /// Customer details i.e. name, email and phone number
   Customer get customer => throw _privateConstructorUsedError;
 
-  /// Return URL redirects users back to the originating page during a checkout
-  /// flow
+  /// Return URL redirects users back to the originating page during a
+  /// checkout flow
   String get returnUrl => throw _privateConstructorUsedError;
 
   /// Result URL - HTTP callback endpoint on your server for receiving event
@@ -63,7 +65,7 @@ abstract class $SeamlessTransactionCopyWith<$Res> {
       {@JsonKey(name: 'amountDetails') Amount amount,
       @JsonKey(name: 'reasonForPayment') String description,
       @JsonKey(name: 'merchantReference') String reference,
-      @JsonKey(name: 'paymentMethodCode') String paymentMethod,
+      String paymentMethodCode,
       Customer customer,
       String returnUrl,
       String resultUrl});
@@ -88,7 +90,7 @@ class _$SeamlessTransactionCopyWithImpl<$Res, $Val extends SeamlessTransaction>
     Object? amount = null,
     Object? description = null,
     Object? reference = null,
-    Object? paymentMethod = null,
+    Object? paymentMethodCode = null,
     Object? customer = null,
     Object? returnUrl = null,
     Object? resultUrl = null,
@@ -106,9 +108,9 @@ class _$SeamlessTransactionCopyWithImpl<$Res, $Val extends SeamlessTransaction>
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentMethod: null == paymentMethod
-          ? _value.paymentMethod
-          : paymentMethod // ignore: cast_nullable_to_non_nullable
+      paymentMethodCode: null == paymentMethodCode
+          ? _value.paymentMethodCode
+          : paymentMethodCode // ignore: cast_nullable_to_non_nullable
               as String,
       customer: null == customer
           ? _value.customer
@@ -154,7 +156,7 @@ abstract class _$$_SeamlessTransactionCopyWith<$Res>
       {@JsonKey(name: 'amountDetails') Amount amount,
       @JsonKey(name: 'reasonForPayment') String description,
       @JsonKey(name: 'merchantReference') String reference,
-      @JsonKey(name: 'paymentMethodCode') String paymentMethod,
+      String paymentMethodCode,
       Customer customer,
       String returnUrl,
       String resultUrl});
@@ -179,7 +181,7 @@ class __$$_SeamlessTransactionCopyWithImpl<$Res>
     Object? amount = null,
     Object? description = null,
     Object? reference = null,
-    Object? paymentMethod = null,
+    Object? paymentMethodCode = null,
     Object? customer = null,
     Object? returnUrl = null,
     Object? resultUrl = null,
@@ -197,9 +199,9 @@ class __$$_SeamlessTransactionCopyWithImpl<$Res>
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
               as String,
-      paymentMethod: null == paymentMethod
-          ? _value.paymentMethod
-          : paymentMethod // ignore: cast_nullable_to_non_nullable
+      paymentMethodCode: null == paymentMethodCode
+          ? _value.paymentMethodCode
+          : paymentMethodCode // ignore: cast_nullable_to_non_nullable
               as String,
       customer: null == customer
           ? _value.customer
@@ -224,7 +226,7 @@ class _$_SeamlessTransaction extends _SeamlessTransaction {
       {@JsonKey(name: 'amountDetails') required this.amount,
       @JsonKey(name: 'reasonForPayment') required this.description,
       @JsonKey(name: 'merchantReference') required this.reference,
-      @JsonKey(name: 'paymentMethodCode') required this.paymentMethod,
+      required this.paymentMethodCode,
       required this.customer,
       this.returnUrl = '',
       this.resultUrl = ''})
@@ -234,31 +236,33 @@ class _$_SeamlessTransaction extends _SeamlessTransaction {
       _$$_SeamlessTransactionFromJson(json);
 
   /// Amount in value and currency
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'amountDetails')
   final Amount amount;
 
   /// Reason for payment
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'reasonForPayment')
   final String description;
 
   /// Reference from merchant system
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'merchantReference')
   final String reference;
 
   /// Payment method code
   @override
-  @JsonKey(name: 'paymentMethodCode')
-  final String paymentMethod;
+  final String paymentMethodCode;
 
   /// Customer details i.e. name, email and phone number
   @override
   final Customer customer;
 
-  /// Return URL redirects users back to the originating page during a checkout
-  /// flow
+  /// Return URL redirects users back to the originating page during a
+  /// checkout flow
   @override
   @JsonKey()
   final String returnUrl;
@@ -271,7 +275,7 @@ class _$_SeamlessTransaction extends _SeamlessTransaction {
 
   @override
   String toString() {
-    return 'SeamlessTransaction(amount: $amount, description: $description, reference: $reference, paymentMethod: $paymentMethod, customer: $customer, returnUrl: $returnUrl, resultUrl: $resultUrl)';
+    return 'SeamlessTransaction(amount: $amount, description: $description, reference: $reference, paymentMethodCode: $paymentMethodCode, customer: $customer, returnUrl: $returnUrl, resultUrl: $resultUrl)';
   }
 
   @override
@@ -284,8 +288,8 @@ class _$_SeamlessTransaction extends _SeamlessTransaction {
                 other.description == description) &&
             (identical(other.reference, reference) ||
                 other.reference == reference) &&
-            (identical(other.paymentMethod, paymentMethod) ||
-                other.paymentMethod == paymentMethod) &&
+            (identical(other.paymentMethodCode, paymentMethodCode) ||
+                other.paymentMethodCode == paymentMethodCode) &&
             (identical(other.customer, customer) ||
                 other.customer == customer) &&
             (identical(other.returnUrl, returnUrl) ||
@@ -297,7 +301,7 @@ class _$_SeamlessTransaction extends _SeamlessTransaction {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, amount, description, reference,
-      paymentMethod, customer, returnUrl, resultUrl);
+      paymentMethodCode, customer, returnUrl, resultUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -319,7 +323,7 @@ abstract class _SeamlessTransaction extends SeamlessTransaction {
       {@JsonKey(name: 'amountDetails') required final Amount amount,
       @JsonKey(name: 'reasonForPayment') required final String description,
       @JsonKey(name: 'merchantReference') required final String reference,
-      @JsonKey(name: 'paymentMethodCode') required final String paymentMethod,
+      required final String paymentMethodCode,
       required final Customer customer,
       final String returnUrl,
       final String resultUrl}) = _$_SeamlessTransaction;
@@ -331,31 +335,33 @@ abstract class _SeamlessTransaction extends SeamlessTransaction {
   @override
 
   /// Amount in value and currency
+// ignore: invalid_annotation_target
   @JsonKey(name: 'amountDetails')
   Amount get amount;
   @override
 
   /// Reason for payment
+// ignore: invalid_annotation_target
   @JsonKey(name: 'reasonForPayment')
   String get description;
   @override
 
   /// Reference from merchant system
+// ignore: invalid_annotation_target
   @JsonKey(name: 'merchantReference')
   String get reference;
   @override
 
   /// Payment method code
-  @JsonKey(name: 'paymentMethodCode')
-  String get paymentMethod;
+  String get paymentMethodCode;
   @override
 
   /// Customer details i.e. name, email and phone number
   Customer get customer;
   @override
 
-  /// Return URL redirects users back to the originating page during a checkout
-  /// flow
+  /// Return URL redirects users back to the originating page during a
+  /// checkout flow
   String get returnUrl;
   @override
 

@@ -7,5 +7,6 @@
 //
 
 export '_api.dart';
+export 'dio_error_to_pesepay_exception.dart';
 export 'pesepay_exception.dart';
-export 'transaction_status_stream_manager.dart';
+export 'transaction_response_stream_manager.dart';

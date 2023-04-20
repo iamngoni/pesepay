@@ -18,22 +18,25 @@ part 'seamless_transaction.g.dart';
 class SeamlessTransaction with _$SeamlessTransaction {
   const factory SeamlessTransaction({
     /// Amount in value and currency
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'amountDetails') required Amount amount,
 
     /// Reason for payment
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'reasonForPayment') required String description,
 
     /// Reference from merchant system
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'merchantReference') required String reference,
 
     /// Payment method code
-    @JsonKey(name: 'paymentMethodCode') required String paymentMethod,
+    required String paymentMethodCode,
 
     /// Customer details i.e. name, email and phone number
     required Customer customer,
 
-    /// Return URL redirects users back to the originating page during a checkout
-    /// flow
+    /// Return URL redirects users back to the originating page during a
+    /// checkout flow
     @Default('') String returnUrl,
 
     /// Result URL - HTTP callback endpoint on your server for receiving event

@@ -8,12 +8,13 @@
 
 import 'dart:async';
 
-import '../../pesepay.dart';
+import '../models/models.dart';
+import '../pesepay.dart';
 
 /// Transaction Status Stream Manager
 ///  Inspired by [paynow](https://pub.dev/packages/paynow)
-class TransactionStatusStreamManager {
-  TransactionStatusStreamManager._({
+class TransactionResponseStreamManager {
+  TransactionResponseStreamManager._({
     required Pesepay pesepay,
     required String pollUrl,
     this.streamInterval = 20,
@@ -22,12 +23,12 @@ class TransactionStatusStreamManager {
     _stream(streamInterval);
   }
 
-  factory TransactionStatusStreamManager.fromPesePay(
+  factory TransactionResponseStreamManager.fromPesePay(
     Pesepay pesepay, {
     required String pollUrl,
     int streamInterval = 20,
   }) {
-    return TransactionStatusStreamManager._(
+    return TransactionResponseStreamManager._(
       pesepay: pesepay,
       pollUrl: pollUrl,
       streamInterval: streamInterval,

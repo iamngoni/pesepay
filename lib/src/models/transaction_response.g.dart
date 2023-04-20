@@ -16,10 +16,19 @@ _$_TransactionResponse _$$_TransactionResponseFromJson(
     );
 
 Map<String, dynamic> _$$_TransactionResponseToJson(
-        _$_TransactionResponse instance) =>
-    <String, dynamic>{
-      'referenceNumber': instance.referenceNumber,
-      'pollUrl': instance.pollUrl,
-      'transactionStatus': instance.transactionStatus,
-      'redirectUrl': instance.redirectUrl,
-    };
+    _$_TransactionResponse instance) {
+  final val = <String, dynamic>{
+    'referenceNumber': instance.referenceNumber,
+    'pollUrl': instance.pollUrl,
+    'transactionStatus': instance.transactionStatus,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('redirectUrl', instance.redirectUrl);
+  return val;
+}

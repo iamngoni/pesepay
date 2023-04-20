@@ -24,6 +24,7 @@ mixin _$Amount {
   double get amount => throw _privateConstructorUsedError;
 
   /// Currency specification e.g. ZWL
+// ignore: invalid_annotation_target
   @JsonKey(name: 'currencyCode')
   String get currency => throw _privateConstructorUsedError;
 
@@ -120,6 +121,7 @@ class _$_Amount extends _Amount {
   final double amount;
 
   /// Currency specification e.g. ZWL
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'currencyCode')
   final String currency;
@@ -173,6 +175,7 @@ abstract class _Amount extends Amount {
   @override
 
   /// Currency specification e.g. ZWL
+// ignore: invalid_annotation_target
   @JsonKey(name: 'currencyCode')
   String get currency;
   @override

@@ -6,7 +6,6 @@ import 'package:encrypt/encrypt.dart';
 import 'package:localregex/localregex.dart';
 
 import 'models/models.dart';
-import 'utils/dio_error_to_pesepay_exception.dart';
 import 'utils/utils.dart';
 
 /// A simple library that wraps Pesepay payment gateway functionalities for
@@ -34,7 +33,13 @@ class Pesepay {
     required this.encryptionKey,
     this.resultUrl,
     this.returnUrl,
-  }) : _dio = Dio();
+  }) : _dio = Dio()
+          ..interceptors.add(
+            LogInterceptor(
+              responseBody: true,
+              requestBody: true,
+            ),
+          );
 
   /// This can be retrieved from the Pesepay Dashboard
   /// http://dashboard.pesepay.com/
@@ -51,6 +56,9 @@ class Pesepay {
   /// Return URL redirects users back to the originating page during a checkout
   /// flow
   final String? returnUrl;
+
+  /// [TransactionResponse] stream manager
+  TransactionResponseStreamManager? _transactionResponseStreamManager;
 
   final Dio _dio;
 
@@ -172,6 +180,12 @@ class Pesepay {
       throw const PesepayException('Customer email is invalid');
     }
 
+    if (!LocalRegex.isZimMobile(customerPhone)) {
+      throw const PesepayException(
+        'Customer phone is not a valid Zim mobile number',
+      );
+    }
+
     // ignore: no_leading_underscores_for_local_identifiers
     final Amount _amount = Amount(
       amount: amount,
@@ -188,7 +202,7 @@ class Pesepay {
       amount: _amount,
       description: transactionDescription,
       reference: transactionReference,
-      paymentMethod: paymentMethodCode,
+      paymentMethodCode: paymentMethodCode,
       customer: customer,
     );
   }
@@ -238,12 +252,14 @@ class Pesepay {
     }
   }
 
+  /// Get the list of active currencies
+  /// Returns a list of [Currency]
   static Future<List<Currency>> getActiveCurrencies() async {
     try {
       log('Fetching active currencies ...');
       final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
       final Response<List<dynamic>> response =
-          await staticDio.get('/currencies/active');
+          await staticDio.get('v1/currencies/active');
       final List<Currency> currencies = (response.data!)
           .map<Currency>(
             (json) => Currency.fromJson(json as Map<String, dynamic>),
@@ -255,6 +271,59 @@ class Pesepay {
       throw PesepayException(e.toString(), stackTrace: s);
     } catch (e, s) {
       throw PesepayException('Pesepay runtime exception', stackTrace: s);
+    }
+  }
+
+  /// Get the list of payment methods by currency
+  /// Returns a list of [Currency]
+  static Future<List<PaymentMethod>> getPaymentMethodsByCurrency(
+    Currency currency,
+  ) async {
+    try {
+      log('Fetching active currencies ...');
+      final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
+      final Response<List<dynamic>> response = await staticDio.get(
+        'v1/payment-methods/for-currency',
+        queryParameters: {
+          'currencyCode': currency.code,
+        },
+      );
+      final List<PaymentMethod> methods = (response.data!)
+          .map<PaymentMethod>(
+            (json) => PaymentMethod.fromJson(json as Map<String, dynamic>),
+          )
+          .toList();
+
+      return methods;
+    } on DioError catch (e, s) {
+      throw PesepayException(e.toString(), stackTrace: s);
+    } catch (e, s) {
+      throw PesepayException('Pesepay runtime exception', stackTrace: s);
+    }
+  }
+
+  /// Stream Transaction Response,
+  /// streamInterval shows the number of seconds to wait for next polling in the
+  /// stream
+  /// returns a [Stream] of [TransactionResponse]
+  Stream<TransactionResponse> streamTransactionResponse(
+    String pollUrl, {
+    int streamInterval = 20,
+  }) {
+    _transactionResponseStreamManager =
+        TransactionResponseStreamManager.fromPesePay(
+      this,
+      streamInterval: streamInterval,
+      pollUrl: pollUrl,
+    );
+
+    return _transactionResponseStreamManager!.stream;
+  }
+
+  /// close [_transactionResponseStreamManager] stream
+  void closeStream() {
+    if (_transactionResponseStreamManager != null) {
+      _transactionResponseStreamManager!.dispose();
     }
   }
 

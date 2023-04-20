@@ -21,14 +21,17 @@ Transaction _$TransactionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Transaction {
   /// Amount in value and currency
+// ignore: invalid_annotation_target
   @JsonKey(name: 'amountDetails')
   Amount get amount => throw _privateConstructorUsedError;
 
   /// Reason for payment
+// ignore: invalid_annotation_target
   @JsonKey(name: 'reasonForPayment')
   String get description => throw _privateConstructorUsedError;
 
   /// Reference from the merchant system
+// ignore: invalid_annotation_target
   @JsonKey(name: 'merchantReference')
   String? get reference => throw _privateConstructorUsedError;
 
@@ -39,8 +42,8 @@ mixin _$Transaction {
   /// notifications
   String get resultUrl => throw _privateConstructorUsedError;
 
-  /// Return URL redirects users back to the originating page during a checkout
-  /// flow
+  /// Return URL redirects users back to the originating page during a
+  /// checkout flow
   String get returnUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -206,16 +209,19 @@ class _$_Transaction extends _Transaction {
       _$$_TransactionFromJson(json);
 
   /// Amount in value and currency
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'amountDetails')
   final Amount amount;
 
   /// Reason for payment
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'reasonForPayment')
   final String description;
 
   /// Reference from the merchant system
+// ignore: invalid_annotation_target
   @override
   @JsonKey(name: 'merchantReference')
   final String? reference;
@@ -231,8 +237,8 @@ class _$_Transaction extends _Transaction {
   @JsonKey()
   final String resultUrl;
 
-  /// Return URL redirects users back to the originating page during a checkout
-  /// flow
+  /// Return URL redirects users back to the originating page during a
+  /// checkout flow
   @override
   @JsonKey()
   final String returnUrl;
@@ -295,16 +301,19 @@ abstract class _Transaction extends Transaction {
   @override
 
   /// Amount in value and currency
+// ignore: invalid_annotation_target
   @JsonKey(name: 'amountDetails')
   Amount get amount;
   @override
 
   /// Reason for payment
+// ignore: invalid_annotation_target
   @JsonKey(name: 'reasonForPayment')
   String get description;
   @override
 
   /// Reference from the merchant system
+// ignore: invalid_annotation_target
   @JsonKey(name: 'merchantReference')
   String? get reference;
   @override
@@ -318,8 +327,8 @@ abstract class _Transaction extends Transaction {
   String get resultUrl;
   @override
 
-  /// Return URL redirects users back to the originating page during a checkout
-  /// flow
+  /// Return URL redirects users back to the originating page during a
+  /// checkout flow
   String get returnUrl;
   @override
   @JsonKey(ignore: true)

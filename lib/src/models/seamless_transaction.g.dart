@@ -12,7 +12,7 @@ _$_SeamlessTransaction _$$_SeamlessTransactionFromJson(
       amount: Amount.fromJson(json['amountDetails'] as Map<String, dynamic>),
       description: json['reasonForPayment'] as String,
       reference: json['merchantReference'] as String,
-      paymentMethod: json['paymentMethodCode'] as String,
+      paymentMethodCode: json['paymentMethodCode'] as String,
       customer: Customer.fromJson(json['customer'] as Map<String, dynamic>),
       returnUrl: json['returnUrl'] as String? ?? '',
       resultUrl: json['resultUrl'] as String? ?? '',
@@ -21,11 +21,11 @@ _$_SeamlessTransaction _$$_SeamlessTransactionFromJson(
 Map<String, dynamic> _$$_SeamlessTransactionToJson(
         _$_SeamlessTransaction instance) =>
     <String, dynamic>{
-      'amountDetails': instance.amount,
+      'amountDetails': instance.amount.toJson(),
       'reasonForPayment': instance.description,
       'merchantReference': instance.reference,
-      'paymentMethodCode': instance.paymentMethod,
-      'customer': instance.customer,
+      'paymentMethodCode': instance.paymentMethodCode,
+      'customer': instance.customer.toJson(),
       'returnUrl': instance.returnUrl,
       'resultUrl': instance.resultUrl,
     };
