@@ -1,3 +1,8 @@
+# 0.3.1
+
+- add `TransactionStatus` enum to better handling of transaction statuses
+- refactor `Dio` error handler for bad responses
+
 # 0.3.0
 
 - fix `Pesepay.getActiveCurrencies` error handling
