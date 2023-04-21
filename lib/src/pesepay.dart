@@ -268,7 +268,7 @@ class Pesepay {
 
       return currencies;
     } on DioError catch (e, s) {
-      throw PesepayException(e.toString(), stackTrace: s);
+      throw dioErrorToPesepayException(e, s);
     } catch (e, s) {
       throw PesepayException('Pesepay runtime exception', stackTrace: s);
     }
@@ -296,7 +296,7 @@ class Pesepay {
 
       return methods;
     } on DioError catch (e, s) {
-      throw PesepayException(e.toString(), stackTrace: s);
+      throw dioErrorToPesepayException(e, s);
     } catch (e, s) {
       throw PesepayException('Pesepay runtime exception', stackTrace: s);
     }

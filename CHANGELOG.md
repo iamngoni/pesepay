@@ -1,3 +1,8 @@
+# 0.3.0
+
+- fix `Pesepay.getActiveCurrencies` error handling
+- fix `Pesepay.getPaymentMethodsByCurrency` error handling
+
 # 0.2.0
 
 - initiate web transaction
