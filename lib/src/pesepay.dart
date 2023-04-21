@@ -33,13 +33,7 @@ class Pesepay {
     required this.encryptionKey,
     this.resultUrl,
     this.returnUrl,
-  }) : _dio = Dio()
-          ..interceptors.add(
-            LogInterceptor(
-              responseBody: true,
-              requestBody: true,
-            ),
-          );
+  }) : _dio = Dio();
 
   /// This can be retrieved from the Pesepay Dashboard
   /// http://dashboard.pesepay.com/
@@ -257,9 +251,9 @@ class Pesepay {
   static Future<List<Currency>> getActiveCurrencies() async {
     try {
       log('Fetching active currencies ...');
-      final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
+      final Dio dio = Dio()..options.baseUrl = ApiConfig.baseUrl;
       final Response<List<dynamic>> response =
-          await staticDio.get('v1/currencies/active');
+          await dio.get('/v1/currencies/active');
       final List<Currency> currencies = (response.data!)
           .map<Currency>(
             (json) => Currency.fromJson(json as Map<String, dynamic>),
@@ -281,9 +275,9 @@ class Pesepay {
   ) async {
     try {
       log('Fetching active currencies ...');
-      final Dio staticDio = Dio()..options.baseUrl = ApiConfig.baseUrl;
-      final Response<List<dynamic>> response = await staticDio.get(
-        'v1/payment-methods/for-currency',
+      final Dio dio = Dio()..options.baseUrl = ApiConfig.baseUrl;
+      final Response<List<dynamic>> response = await dio.get(
+        '/v1/payment-methods/for-currency',
         queryParameters: {
           'currencyCode': currency.code,
         },
