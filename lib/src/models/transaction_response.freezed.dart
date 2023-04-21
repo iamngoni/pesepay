@@ -27,7 +27,7 @@ mixin _$TransactionResponse {
   String get pollUrl => throw _privateConstructorUsedError;
 
   /// Transaction Status
-  String get transactionStatus =>
+  TransactionStatus? get transactionStatus =>
       throw _privateConstructorUsedError; // TODO(iamngoni): check if this is necessary 'cause it doesn't seem like it
   /// Redirect URL
   String? get redirectUrl => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $TransactionResponseCopyWith<$Res> {
   $Res call(
       {String referenceNumber,
       String pollUrl,
-      String transactionStatus,
+      TransactionStatus? transactionStatus,
       String? redirectUrl});
 }
 
@@ -66,7 +66,7 @@ class _$TransactionResponseCopyWithImpl<$Res, $Val extends TransactionResponse>
   $Res call({
     Object? referenceNumber = null,
     Object? pollUrl = null,
-    Object? transactionStatus = null,
+    Object? transactionStatus = freezed,
     Object? redirectUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -78,10 +78,10 @@ class _$TransactionResponseCopyWithImpl<$Res, $Val extends TransactionResponse>
           ? _value.pollUrl
           : pollUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      transactionStatus: null == transactionStatus
+      transactionStatus: freezed == transactionStatus
           ? _value.transactionStatus
           : transactionStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TransactionStatus?,
       redirectUrl: freezed == redirectUrl
           ? _value.redirectUrl
           : redirectUrl // ignore: cast_nullable_to_non_nullable
@@ -101,7 +101,7 @@ abstract class _$$_TransactionResponseCopyWith<$Res>
   $Res call(
       {String referenceNumber,
       String pollUrl,
-      String transactionStatus,
+      TransactionStatus? transactionStatus,
       String? redirectUrl});
 }
 
@@ -118,7 +118,7 @@ class __$$_TransactionResponseCopyWithImpl<$Res>
   $Res call({
     Object? referenceNumber = null,
     Object? pollUrl = null,
-    Object? transactionStatus = null,
+    Object? transactionStatus = freezed,
     Object? redirectUrl = freezed,
   }) {
     return _then(_$_TransactionResponse(
@@ -130,10 +130,10 @@ class __$$_TransactionResponseCopyWithImpl<$Res>
           ? _value.pollUrl
           : pollUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      transactionStatus: null == transactionStatus
+      transactionStatus: freezed == transactionStatus
           ? _value.transactionStatus
           : transactionStatus // ignore: cast_nullable_to_non_nullable
-              as String,
+              as TransactionStatus?,
       redirectUrl: freezed == redirectUrl
           ? _value.redirectUrl
           : redirectUrl // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ class _$_TransactionResponse extends _TransactionResponse {
   const _$_TransactionResponse(
       {required this.referenceNumber,
       required this.pollUrl,
-      required this.transactionStatus,
+      this.transactionStatus,
       this.redirectUrl})
       : super._();
 
@@ -165,7 +165,7 @@ class _$_TransactionResponse extends _TransactionResponse {
 
   /// Transaction Status
   @override
-  final String transactionStatus;
+  final TransactionStatus? transactionStatus;
 // TODO(iamngoni): check if this is necessary 'cause it doesn't seem like it
   /// Redirect URL
   @override
@@ -214,7 +214,7 @@ abstract class _TransactionResponse extends TransactionResponse {
   const factory _TransactionResponse(
       {required final String referenceNumber,
       required final String pollUrl,
-      required final String transactionStatus,
+      final TransactionStatus? transactionStatus,
       final String? redirectUrl}) = _$_TransactionResponse;
   const _TransactionResponse._() : super._();
 
@@ -232,7 +232,7 @@ abstract class _TransactionResponse extends TransactionResponse {
   @override
 
   /// Transaction Status
-  String get transactionStatus;
+  TransactionStatus? get transactionStatus;
   @override // TODO(iamngoni): check if this is necessary 'cause it doesn't seem like it
   /// Redirect URL
   String? get redirectUrl;

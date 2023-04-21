@@ -53,10 +53,46 @@ final pesepay = Pesepay(
 ```dart
 final List<Currency> currencies = await Pesepay.getActiveCurrencies();
 ```
+Sample Currency
+```dart
+Currency(
+    name: Zimbabwe Dollar, 
+    description: Zimbabwe Dollar, 
+    code: ZWL, 
+    defaultCurrency: false,
+    rateToDefault: 604.25,
+    active: true
+)
+```
 
 ### Get list of payment methods for selected currency
 ```dart
 final List<PaymentMethod> methods = await Pesepay.getPaymentMethodsByCurrency(currency);
+```
+
+Sample PaymentMethod
+```dart
+PaymentMethod(
+  active: true,
+  code: PZW201,
+  currencies: [ZWL], 
+  description: Make payment directly from your mobile phone.,
+  id: 1,
+  maximumAmount: 50000.0,
+  minimumAmount: 2.0, 
+  name: Ecocash, 
+  processingPaymentMessage: Please enter PIN on the phone that is making the payment.,
+  redirectRequired: false, 
+  redirectURL: null, 
+  requiredFields: [
+    RequiredField(
+      displayName: Phone Number, 
+      fieldType: TEXT, 
+      name: customerPhoneNumber, 
+      optional: false
+    )
+  ]
+)
 ```
 
 ### Perform Web Transaction

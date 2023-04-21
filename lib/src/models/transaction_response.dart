@@ -8,6 +8,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'transaction_status.dart';
+
 part 'transaction_response.freezed.dart';
 part 'transaction_response.g.dart';
 
@@ -21,7 +23,7 @@ class TransactionResponse with _$TransactionResponse {
     required String pollUrl,
 
     /// Transaction Status
-    required String transactionStatus,
+    TransactionStatus? transactionStatus,
 
     // TODO(iamngoni): check if this is necessary 'cause it doesn't seem like it
     /// Redirect URL
@@ -34,5 +36,5 @@ class TransactionResponse with _$TransactionResponse {
       _$TransactionResponseFromJson(json);
 
   /// Checks whether transaction was successful or not
-  bool get paid => transactionStatus == 'SUCCESS';
+  bool get paid => transactionStatus == TransactionStatus.success;
 }

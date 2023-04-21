@@ -33,7 +33,13 @@ class Pesepay {
     required this.encryptionKey,
     this.resultUrl,
     this.returnUrl,
-  }) : _dio = Dio();
+  }) : _dio = Dio()
+          ..interceptors.add(
+            LogInterceptor(
+              responseBody: true,
+              requestBody: true,
+            ),
+          );
 
   /// This can be retrieved from the Pesepay Dashboard
   /// http://dashboard.pesepay.com/

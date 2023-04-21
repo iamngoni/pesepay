@@ -25,17 +25,17 @@ PesepayException dioErrorToPesepayException(
       break;
     case DioErrorType.receiveTimeout:
       exception = PesepayException('Receive Timeout', stackTrace: stackTrace);
-
       break;
     case DioErrorType.badResponse:
       exception = PesepayException(
-        error.response?.statusMessage ?? 'Bad Response',
+        'Bad Response'
+        ' (${error.response?.statusCode}):${error.response?.statusMessage}',
         stackTrace: stackTrace,
       );
       break;
     case DioErrorType.unknown:
       exception = PesepayException(
-        'Pesepay is unavailable at the moment',
+        'Pesepay services are unavailable at the moment',
         stackTrace: stackTrace,
       );
       break;
