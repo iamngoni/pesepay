@@ -12,6 +12,7 @@ analyzer:
 
 linter:
   rules:
+    use_null_aware_elements: true
     avoid_relative_lib_imports: false
     lines_longer_than_80_chars: true
     avoid_dynamic_calls: true

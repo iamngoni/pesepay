@@ -1,7 +1,10 @@
+# 0.4.1
+- Updated minimum Dart SDK requirement to 3.8.0 for null-aware elements support
+
 # 0.4.0
 
 - **BREAKING**: Updated to Freezed 3.2.0 - added `abstract` modifier to all model classes
-- Updated minimum Dart SDK requirement to 3.0.0 for null-aware elements support
+- Updated minimum Dart SDK requirement to 3.0.0
 - Fixed code generation issues with json_serializable
 - Resolved all diagnostic errors and warnings
 - Updated dependency constraints for better compatibility
