@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,177 +9,278 @@ part of 'amount.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-Amount _$AmountFromJson(Map<String, dynamic> json) {
-  return _Amount.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Amount {
-  /// The amount figure in $
-  double get amount => throw _privateConstructorUsedError;
 
-  /// Currency specification e.g. ZWL
+/// The amount figure in dollars
+ double get amount;/// Currency specification e.g. ZWL
 // ignore: invalid_annotation_target
-  @JsonKey(name: 'currencyCode')
-  String get currency => throw _privateConstructorUsedError;
+@JsonKey(name: 'currencyCode') String get currency;
+/// Create a copy of Amount
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AmountCopyWith<Amount> get copyWith => _$AmountCopyWithImpl<Amount>(this as Amount, _$identity);
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $AmountCopyWith<Amount> get copyWith => throw _privateConstructorUsedError;
+  /// Serializes this Amount to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Amount&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.currency, currency) || other.currency == currency));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,amount,currency);
+
+@override
+String toString() {
+  return 'Amount(amount: $amount, currency: $currency)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $AmountCopyWith<$Res> {
-  factory $AmountCopyWith(Amount value, $Res Function(Amount) then) =
-      _$AmountCopyWithImpl<$Res, Amount>;
-  @useResult
-  $Res call({double amount, @JsonKey(name: 'currencyCode') String currency});
-}
+abstract mixin class $AmountCopyWith<$Res>  {
+  factory $AmountCopyWith(Amount value, $Res Function(Amount) _then) = _$AmountCopyWithImpl;
+@useResult
+$Res call({
+ double amount,@JsonKey(name: 'currencyCode') String currency
+});
 
+
+
+
+}
 /// @nodoc
-class _$AmountCopyWithImpl<$Res, $Val extends Amount>
+class _$AmountCopyWithImpl<$Res>
     implements $AmountCopyWith<$Res> {
-  _$AmountCopyWithImpl(this._value, this._then);
+  _$AmountCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Amount _self;
+  final $Res Function(Amount) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? amount = null,
-    Object? currency = null,
-  }) {
-    return _then(_value.copyWith(
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
+/// Create a copy of Amount
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? amount = null,Object? currency = null,}) {
+  return _then(_self.copyWith(
+amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
 
-/// @nodoc
-abstract class _$$_AmountCopyWith<$Res> implements $AmountCopyWith<$Res> {
-  factory _$$_AmountCopyWith(_$_Amount value, $Res Function(_$_Amount) then) =
-      __$$_AmountCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({double amount, @JsonKey(name: 'currencyCode') String currency});
 }
 
-/// @nodoc
-class __$$_AmountCopyWithImpl<$Res>
-    extends _$AmountCopyWithImpl<$Res, _$_Amount>
-    implements _$$_AmountCopyWith<$Res> {
-  __$$_AmountCopyWithImpl(_$_Amount _value, $Res Function(_$_Amount) _then)
-      : super(_value, _then);
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? amount = null,
-    Object? currency = null,
-  }) {
-    return _then(_$_Amount(
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as double,
-      currency: null == currency
-          ? _value.currency
-          : currency // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Adds pattern-matching-related methods to [Amount].
+extension AmountPatterns on Amount {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Amount value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Amount() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Amount value)  $default,){
+final _that = this;
+switch (_that) {
+case _Amount():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Amount value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Amount() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double amount, @JsonKey(name: 'currencyCode')  String currency)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Amount() when $default != null:
+return $default(_that.amount,_that.currency);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double amount, @JsonKey(name: 'currencyCode')  String currency)  $default,) {final _that = this;
+switch (_that) {
+case _Amount():
+return $default(_that.amount,_that.currency);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double amount, @JsonKey(name: 'currencyCode')  String currency)?  $default,) {final _that = this;
+switch (_that) {
+case _Amount() when $default != null:
+return $default(_that.amount,_that.currency);case _:
+  return null;
+
+}
+}
+
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Amount extends _Amount {
-  const _$_Amount(
-      {required this.amount,
-      @JsonKey(name: 'currencyCode') required this.currency})
-      : super._();
 
-  factory _$_Amount.fromJson(Map<String, dynamic> json) =>
-      _$$_AmountFromJson(json);
+class _Amount extends Amount {
+  const _Amount({required this.amount, @JsonKey(name: 'currencyCode') required this.currency}): super._();
+  factory _Amount.fromJson(Map<String, dynamic> json) => _$AmountFromJson(json);
 
-  /// The amount figure in $
-  @override
-  final double amount;
-
-  /// Currency specification e.g. ZWL
+/// The amount figure in dollars
+@override final  double amount;
+/// Currency specification e.g. ZWL
 // ignore: invalid_annotation_target
-  @override
-  @JsonKey(name: 'currencyCode')
-  final String currency;
+@override@JsonKey(name: 'currencyCode') final  String currency;
 
-  @override
-  String toString() {
-    return 'Amount(amount: $amount, currency: $currency)';
-  }
+/// Create a copy of Amount
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AmountCopyWith<_Amount> get copyWith => __$AmountCopyWithImpl<_Amount>(this, _$identity);
 
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Amount &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.currency, currency) ||
-                other.currency == currency));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, amount, currency);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_AmountCopyWith<_$_Amount> get copyWith =>
-      __$$_AmountCopyWithImpl<_$_Amount>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_AmountToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$AmountToJson(this, );
 }
 
-abstract class _Amount extends Amount {
-  const factory _Amount(
-          {required final double amount,
-          @JsonKey(name: 'currencyCode') required final String currency}) =
-      _$_Amount;
-  const _Amount._() : super._();
-
-  factory _Amount.fromJson(Map<String, dynamic> json) = _$_Amount.fromJson;
-
-  @override
-
-  /// The amount figure in $
-  double get amount;
-  @override
-
-  /// Currency specification e.g. ZWL
-// ignore: invalid_annotation_target
-  @JsonKey(name: 'currencyCode')
-  String get currency;
-  @override
-  @JsonKey(ignore: true)
-  _$$_AmountCopyWith<_$_Amount> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Amount&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.currency, currency) || other.currency == currency));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,amount,currency);
+
+@override
+String toString() {
+  return 'Amount(amount: $amount, currency: $currency)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AmountCopyWith<$Res> implements $AmountCopyWith<$Res> {
+  factory _$AmountCopyWith(_Amount value, $Res Function(_Amount) _then) = __$AmountCopyWithImpl;
+@override @useResult
+$Res call({
+ double amount,@JsonKey(name: 'currencyCode') String currency
+});
+
+
+
+
+}
+/// @nodoc
+class __$AmountCopyWithImpl<$Res>
+    implements _$AmountCopyWith<$Res> {
+  __$AmountCopyWithImpl(this._self, this._then);
+
+  final _Amount _self;
+  final $Res Function(_Amount) _then;
+
+/// Create a copy of Amount
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? amount = null,Object? currency = null,}) {
+  return _then(_Amount(
+amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as double,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+// dart format on

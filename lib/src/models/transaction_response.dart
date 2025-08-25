@@ -14,13 +14,13 @@ part 'transaction_response.freezed.dart';
 part 'transaction_response.g.dart';
 
 @freezed
-class TransactionResponse with _$TransactionResponse {
+abstract class TransactionResponse with _$TransactionResponse {
   const factory TransactionResponse({
     /// Reference Number
     required String referenceNumber,
 
     /// Poll Url
-    required String pollUrl,
+    required String? pollUrl,
 
     /// Transaction Status
     TransactionStatus? transactionStatus,

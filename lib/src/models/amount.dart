@@ -12,10 +12,10 @@ part 'amount.freezed.dart';
 part 'amount.g.dart';
 
 @freezed
-class Amount with _$Amount {
+abstract class Amount with _$Amount {
   /// Create amount details instance
   const factory Amount({
-    /// The amount figure in $
+    /// The amount figure in dollars
     required double amount,
 
     /// Currency specification e.g. ZWL

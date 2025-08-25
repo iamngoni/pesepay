@@ -12,7 +12,7 @@ part 'required_field.freezed.dart';
 part 'required_field.g.dart';
 
 @freezed
-class RequiredField with _$RequiredField {
+abstract class RequiredField with _$RequiredField {
   const factory RequiredField({
     required String displayName,
     required String fieldType,

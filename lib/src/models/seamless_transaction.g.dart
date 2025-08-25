@@ -6,9 +6,8 @@ part of 'seamless_transaction.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SeamlessTransaction _$$_SeamlessTransactionFromJson(
-        Map<String, dynamic> json) =>
-    _$_SeamlessTransaction(
+_SeamlessTransaction _$SeamlessTransactionFromJson(Map<String, dynamic> json) =>
+    _SeamlessTransaction(
       amount: Amount.fromJson(json['amountDetails'] as Map<String, dynamic>),
       description: json['reasonForPayment'] as String,
       reference: json['merchantReference'] as String,
@@ -18,14 +17,14 @@ _$_SeamlessTransaction _$$_SeamlessTransactionFromJson(
       resultUrl: json['resultUrl'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_SeamlessTransactionToJson(
-        _$_SeamlessTransaction instance) =>
-    <String, dynamic>{
-      'amountDetails': instance.amount.toJson(),
-      'reasonForPayment': instance.description,
-      'merchantReference': instance.reference,
-      'paymentMethodCode': instance.paymentMethodCode,
-      'customer': instance.customer.toJson(),
-      'returnUrl': instance.returnUrl,
-      'resultUrl': instance.resultUrl,
-    };
+Map<String, dynamic> _$SeamlessTransactionToJson(
+  _SeamlessTransaction instance,
+) => <String, dynamic>{
+  'amountDetails': instance.amount.toJson(),
+  'reasonForPayment': instance.description,
+  'merchantReference': instance.reference,
+  'paymentMethodCode': instance.paymentMethodCode,
+  'customer': instance.customer.toJson(),
+  'returnUrl': instance.returnUrl,
+  'resultUrl': instance.resultUrl,
+};

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,329 +9,324 @@ part of 'transaction.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-Transaction _$TransactionFromJson(Map<String, dynamic> json) {
-  return _Transaction.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Transaction {
-  /// Amount in value and currency
+
+/// Amount in value and currency
 // ignore: invalid_annotation_target
-  @JsonKey(name: 'amountDetails')
-  Amount get amount => throw _privateConstructorUsedError;
-
-  /// Reason for payment
+@JsonKey(name: 'amountDetails') Amount get amount;/// Reason for payment
 // ignore: invalid_annotation_target
-  @JsonKey(name: 'reasonForPayment')
-  String get description => throw _privateConstructorUsedError;
-
-  /// Reference from the merchant system
+@JsonKey(name: 'reasonForPayment') String get description;/// Reference from the merchant system
 // ignore: invalid_annotation_target
-  @JsonKey(name: 'merchantReference')
-  String? get reference => throw _privateConstructorUsedError;
+@JsonKey(name: 'merchantReference') String? get reference;/// Type of transaction
+ String get transactionType;/// Result URL - HTTP callback endpoint on your server for receiving event
+/// notifications
+ String get resultUrl;/// Return URL redirects users back to the originating page during a
+/// checkout flow
+ String get returnUrl;
+/// Create a copy of Transaction
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TransactionCopyWith<Transaction> get copyWith => _$TransactionCopyWithImpl<Transaction>(this as Transaction, _$identity);
 
-  /// Type of transaction
-  String get transactionType => throw _privateConstructorUsedError;
+  /// Serializes this Transaction to a JSON map.
+  Map<String, dynamic> toJson();
 
-  /// Result URL - HTTP callback endpoint on your server for receiving event
-  /// notifications
-  String get resultUrl => throw _privateConstructorUsedError;
 
-  /// Return URL redirects users back to the originating page during a
-  /// checkout flow
-  String get returnUrl => throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Transaction&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.description, description) || other.description == description)&&(identical(other.reference, reference) || other.reference == reference)&&(identical(other.transactionType, transactionType) || other.transactionType == transactionType)&&(identical(other.resultUrl, resultUrl) || other.resultUrl == resultUrl)&&(identical(other.returnUrl, returnUrl) || other.returnUrl == returnUrl));
+}
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $TransactionCopyWith<Transaction> get copyWith =>
-      throw _privateConstructorUsedError;
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,amount,description,reference,transactionType,resultUrl,returnUrl);
+
+@override
+String toString() {
+  return 'Transaction(amount: $amount, description: $description, reference: $reference, transactionType: $transactionType, resultUrl: $resultUrl, returnUrl: $returnUrl)';
+}
+
+
 }
 
 /// @nodoc
-abstract class $TransactionCopyWith<$Res> {
-  factory $TransactionCopyWith(
-          Transaction value, $Res Function(Transaction) then) =
-      _$TransactionCopyWithImpl<$Res, Transaction>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'amountDetails') Amount amount,
-      @JsonKey(name: 'reasonForPayment') String description,
-      @JsonKey(name: 'merchantReference') String? reference,
-      String transactionType,
-      String resultUrl,
-      String returnUrl});
+abstract mixin class $TransactionCopyWith<$Res>  {
+  factory $TransactionCopyWith(Transaction value, $Res Function(Transaction) _then) = _$TransactionCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'amountDetails') Amount amount,@JsonKey(name: 'reasonForPayment') String description,@JsonKey(name: 'merchantReference') String? reference, String transactionType, String resultUrl, String returnUrl
+});
 
-  $AmountCopyWith<$Res> get amount;
+
+$AmountCopyWith<$Res> get amount;
+
 }
-
 /// @nodoc
-class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
+class _$TransactionCopyWithImpl<$Res>
     implements $TransactionCopyWith<$Res> {
-  _$TransactionCopyWithImpl(this._value, this._then);
+  _$TransactionCopyWithImpl(this._self, this._then);
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  final Transaction _self;
+  final $Res Function(Transaction) _then;
 
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? amount = null,
-    Object? description = null,
-    Object? reference = freezed,
-    Object? transactionType = null,
-    Object? resultUrl = null,
-    Object? returnUrl = null,
-  }) {
-    return _then(_value.copyWith(
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as Amount,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String?,
-      transactionType: null == transactionType
-          ? _value.transactionType
-          : transactionType // ignore: cast_nullable_to_non_nullable
-              as String,
-      resultUrl: null == resultUrl
-          ? _value.resultUrl
-          : resultUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      returnUrl: null == returnUrl
-          ? _value.returnUrl
-          : returnUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AmountCopyWith<$Res> get amount {
-    return $AmountCopyWith<$Res>(_value.amount, (value) {
-      return _then(_value.copyWith(amount: value) as $Val);
-    });
-  }
+/// Create a copy of Transaction
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? amount = null,Object? description = null,Object? reference = freezed,Object? transactionType = null,Object? resultUrl = null,Object? returnUrl = null,}) {
+  return _then(_self.copyWith(
+amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as Amount,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,reference: freezed == reference ? _self.reference : reference // ignore: cast_nullable_to_non_nullable
+as String?,transactionType: null == transactionType ? _self.transactionType : transactionType // ignore: cast_nullable_to_non_nullable
+as String,resultUrl: null == resultUrl ? _self.resultUrl : resultUrl // ignore: cast_nullable_to_non_nullable
+as String,returnUrl: null == returnUrl ? _self.returnUrl : returnUrl // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+/// Create a copy of Transaction
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AmountCopyWith<$Res> get amount {
+  
+  return $AmountCopyWith<$Res>(_self.amount, (value) {
+    return _then(_self.copyWith(amount: value));
+  });
+}
 }
 
-/// @nodoc
-abstract class _$$_TransactionCopyWith<$Res>
-    implements $TransactionCopyWith<$Res> {
-  factory _$$_TransactionCopyWith(
-          _$_Transaction value, $Res Function(_$_Transaction) then) =
-      __$$_TransactionCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'amountDetails') Amount amount,
-      @JsonKey(name: 'reasonForPayment') String description,
-      @JsonKey(name: 'merchantReference') String? reference,
-      String transactionType,
-      String resultUrl,
-      String returnUrl});
 
-  @override
-  $AmountCopyWith<$Res> get amount;
+/// Adds pattern-matching-related methods to [Transaction].
+extension TransactionPatterns on Transaction {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Transaction value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Transaction() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Transaction value)  $default,){
+final _that = this;
+switch (_that) {
+case _Transaction():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Transaction value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Transaction() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'amountDetails')  Amount amount, @JsonKey(name: 'reasonForPayment')  String description, @JsonKey(name: 'merchantReference')  String? reference,  String transactionType,  String resultUrl,  String returnUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Transaction() when $default != null:
+return $default(_that.amount,_that.description,_that.reference,_that.transactionType,_that.resultUrl,_that.returnUrl);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'amountDetails')  Amount amount, @JsonKey(name: 'reasonForPayment')  String description, @JsonKey(name: 'merchantReference')  String? reference,  String transactionType,  String resultUrl,  String returnUrl)  $default,) {final _that = this;
+switch (_that) {
+case _Transaction():
+return $default(_that.amount,_that.description,_that.reference,_that.transactionType,_that.resultUrl,_that.returnUrl);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'amountDetails')  Amount amount, @JsonKey(name: 'reasonForPayment')  String description, @JsonKey(name: 'merchantReference')  String? reference,  String transactionType,  String resultUrl,  String returnUrl)?  $default,) {final _that = this;
+switch (_that) {
+case _Transaction() when $default != null:
+return $default(_that.amount,_that.description,_that.reference,_that.transactionType,_that.resultUrl,_that.returnUrl);case _:
+  return null;
+
+}
 }
 
-/// @nodoc
-class __$$_TransactionCopyWithImpl<$Res>
-    extends _$TransactionCopyWithImpl<$Res, _$_Transaction>
-    implements _$$_TransactionCopyWith<$Res> {
-  __$$_TransactionCopyWithImpl(
-      _$_Transaction _value, $Res Function(_$_Transaction) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? amount = null,
-    Object? description = null,
-    Object? reference = freezed,
-    Object? transactionType = null,
-    Object? resultUrl = null,
-    Object? returnUrl = null,
-  }) {
-    return _then(_$_Transaction(
-      amount: null == amount
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as Amount,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      reference: freezed == reference
-          ? _value.reference
-          : reference // ignore: cast_nullable_to_non_nullable
-              as String?,
-      transactionType: null == transactionType
-          ? _value.transactionType
-          : transactionType // ignore: cast_nullable_to_non_nullable
-              as String,
-      resultUrl: null == resultUrl
-          ? _value.resultUrl
-          : resultUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-      returnUrl: null == returnUrl
-          ? _value.returnUrl
-          : returnUrl // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Transaction extends _Transaction {
-  const _$_Transaction(
-      {@JsonKey(name: 'amountDetails') required this.amount,
-      @JsonKey(name: 'reasonForPayment') required this.description,
-      @JsonKey(name: 'merchantReference') this.reference,
-      this.transactionType = 'BASIC',
-      this.resultUrl = '',
-      this.returnUrl = ''})
-      : super._();
 
-  factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
-      _$$_TransactionFromJson(json);
+class _Transaction extends Transaction {
+  const _Transaction({@JsonKey(name: 'amountDetails') required this.amount, @JsonKey(name: 'reasonForPayment') required this.description, @JsonKey(name: 'merchantReference') this.reference, this.transactionType = 'BASIC', this.resultUrl = '', this.returnUrl = ''}): super._();
+  factory _Transaction.fromJson(Map<String, dynamic> json) => _$TransactionFromJson(json);
 
-  /// Amount in value and currency
+/// Amount in value and currency
 // ignore: invalid_annotation_target
-  @override
-  @JsonKey(name: 'amountDetails')
-  final Amount amount;
-
-  /// Reason for payment
+@override@JsonKey(name: 'amountDetails') final  Amount amount;
+/// Reason for payment
 // ignore: invalid_annotation_target
-  @override
-  @JsonKey(name: 'reasonForPayment')
-  final String description;
-
-  /// Reference from the merchant system
+@override@JsonKey(name: 'reasonForPayment') final  String description;
+/// Reference from the merchant system
 // ignore: invalid_annotation_target
-  @override
-  @JsonKey(name: 'merchantReference')
-  final String? reference;
+@override@JsonKey(name: 'merchantReference') final  String? reference;
+/// Type of transaction
+@override@JsonKey() final  String transactionType;
+/// Result URL - HTTP callback endpoint on your server for receiving event
+/// notifications
+@override@JsonKey() final  String resultUrl;
+/// Return URL redirects users back to the originating page during a
+/// checkout flow
+@override@JsonKey() final  String returnUrl;
 
-  /// Type of transaction
-  @override
-  @JsonKey()
-  final String transactionType;
+/// Create a copy of Transaction
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TransactionCopyWith<_Transaction> get copyWith => __$TransactionCopyWithImpl<_Transaction>(this, _$identity);
 
-  /// Result URL - HTTP callback endpoint on your server for receiving event
-  /// notifications
-  @override
-  @JsonKey()
-  final String resultUrl;
-
-  /// Return URL redirects users back to the originating page during a
-  /// checkout flow
-  @override
-  @JsonKey()
-  final String returnUrl;
-
-  @override
-  String toString() {
-    return 'Transaction(amount: $amount, description: $description, reference: $reference, transactionType: $transactionType, resultUrl: $resultUrl, returnUrl: $returnUrl)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Transaction &&
-            (identical(other.amount, amount) || other.amount == amount) &&
-            (identical(other.description, description) ||
-                other.description == description) &&
-            (identical(other.reference, reference) ||
-                other.reference == reference) &&
-            (identical(other.transactionType, transactionType) ||
-                other.transactionType == transactionType) &&
-            (identical(other.resultUrl, resultUrl) ||
-                other.resultUrl == resultUrl) &&
-            (identical(other.returnUrl, returnUrl) ||
-                other.returnUrl == returnUrl));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, amount, description, reference,
-      transactionType, resultUrl, returnUrl);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_TransactionCopyWith<_$_Transaction> get copyWith =>
-      __$$_TransactionCopyWithImpl<_$_Transaction>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TransactionToJson(
-      this,
-    );
-  }
+@override
+Map<String, dynamic> toJson() {
+  return _$TransactionToJson(this, );
 }
 
-abstract class _Transaction extends Transaction {
-  const factory _Transaction(
-      {@JsonKey(name: 'amountDetails') required final Amount amount,
-      @JsonKey(name: 'reasonForPayment') required final String description,
-      @JsonKey(name: 'merchantReference') final String? reference,
-      final String transactionType,
-      final String resultUrl,
-      final String returnUrl}) = _$_Transaction;
-  const _Transaction._() : super._();
-
-  factory _Transaction.fromJson(Map<String, dynamic> json) =
-      _$_Transaction.fromJson;
-
-  @override
-
-  /// Amount in value and currency
-// ignore: invalid_annotation_target
-  @JsonKey(name: 'amountDetails')
-  Amount get amount;
-  @override
-
-  /// Reason for payment
-// ignore: invalid_annotation_target
-  @JsonKey(name: 'reasonForPayment')
-  String get description;
-  @override
-
-  /// Reference from the merchant system
-// ignore: invalid_annotation_target
-  @JsonKey(name: 'merchantReference')
-  String? get reference;
-  @override
-
-  /// Type of transaction
-  String get transactionType;
-  @override
-
-  /// Result URL - HTTP callback endpoint on your server for receiving event
-  /// notifications
-  String get resultUrl;
-  @override
-
-  /// Return URL redirects users back to the originating page during a
-  /// checkout flow
-  String get returnUrl;
-  @override
-  @JsonKey(ignore: true)
-  _$$_TransactionCopyWith<_$_Transaction> get copyWith =>
-      throw _privateConstructorUsedError;
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Transaction&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.description, description) || other.description == description)&&(identical(other.reference, reference) || other.reference == reference)&&(identical(other.transactionType, transactionType) || other.transactionType == transactionType)&&(identical(other.resultUrl, resultUrl) || other.resultUrl == resultUrl)&&(identical(other.returnUrl, returnUrl) || other.returnUrl == returnUrl));
 }
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,amount,description,reference,transactionType,resultUrl,returnUrl);
+
+@override
+String toString() {
+  return 'Transaction(amount: $amount, description: $description, reference: $reference, transactionType: $transactionType, resultUrl: $resultUrl, returnUrl: $returnUrl)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$TransactionCopyWith<$Res> implements $TransactionCopyWith<$Res> {
+  factory _$TransactionCopyWith(_Transaction value, $Res Function(_Transaction) _then) = __$TransactionCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'amountDetails') Amount amount,@JsonKey(name: 'reasonForPayment') String description,@JsonKey(name: 'merchantReference') String? reference, String transactionType, String resultUrl, String returnUrl
+});
+
+
+@override $AmountCopyWith<$Res> get amount;
+
+}
+/// @nodoc
+class __$TransactionCopyWithImpl<$Res>
+    implements _$TransactionCopyWith<$Res> {
+  __$TransactionCopyWithImpl(this._self, this._then);
+
+  final _Transaction _self;
+  final $Res Function(_Transaction) _then;
+
+/// Create a copy of Transaction
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? amount = null,Object? description = null,Object? reference = freezed,Object? transactionType = null,Object? resultUrl = null,Object? returnUrl = null,}) {
+  return _then(_Transaction(
+amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
+as Amount,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
+as String,reference: freezed == reference ? _self.reference : reference // ignore: cast_nullable_to_non_nullable
+as String?,transactionType: null == transactionType ? _self.transactionType : transactionType // ignore: cast_nullable_to_non_nullable
+as String,resultUrl: null == resultUrl ? _self.resultUrl : resultUrl // ignore: cast_nullable_to_non_nullable
+as String,returnUrl: null == returnUrl ? _self.returnUrl : returnUrl // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+/// Create a copy of Transaction
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AmountCopyWith<$Res> get amount {
+  
+  return $AmountCopyWith<$Res>(_self.amount, (value) {
+    return _then(_self.copyWith(amount: value));
+  });
+}
+}
+
+// dart format on

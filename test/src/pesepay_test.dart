@@ -7,8 +7,8 @@ void main() async {
     test('can be instantiated', () {
       expect(
         Pesepay(
-          integrationKey: '',
-          encryptionKey: '',
+          integrationKey: '30452e8b-89ca-4817-9bb2-dbde61dceded',
+          encryptionKey: '0799d47ea28b45829bbf784abe0b31c7',
         ),
         isNotNull,
       );

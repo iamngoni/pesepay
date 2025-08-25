@@ -15,7 +15,7 @@ part 'seamless_transaction.freezed.dart';
 part 'seamless_transaction.g.dart';
 
 @freezed
-class SeamlessTransaction with _$SeamlessTransaction {
+abstract class SeamlessTransaction with _$SeamlessTransaction {
   const factory SeamlessTransaction({
     /// Amount in value and currency
     // ignore: invalid_annotation_target

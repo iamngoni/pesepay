@@ -12,7 +12,7 @@ part 'customer.freezed.dart';
 part 'customer.g.dart';
 
 @freezed
-class Customer with _$Customer {
+abstract class Customer with _$Customer {
   /// Create customer instance
   const factory Customer({
     /// Customer email

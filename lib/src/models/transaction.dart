@@ -14,7 +14,7 @@ part 'transaction.freezed.dart';
 part 'transaction.g.dart';
 
 @freezed
-class Transaction with _$Transaction {
+abstract class Transaction with _$Transaction {
   /// Create transaction instance
   const factory Transaction({
     /// Amount in value and currency

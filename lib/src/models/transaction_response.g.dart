@@ -6,34 +6,25 @@ part of 'transaction_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TransactionResponse _$$_TransactionResponseFromJson(
-        Map<String, dynamic> json) =>
-    _$_TransactionResponse(
+_TransactionResponse _$TransactionResponseFromJson(Map<String, dynamic> json) =>
+    _TransactionResponse(
       referenceNumber: json['referenceNumber'] as String,
-      pollUrl: json['pollUrl'] as String,
+      pollUrl: json['pollUrl'] as String?,
       transactionStatus: $enumDecodeNullable(
-          _$TransactionStatusEnumMap, json['transactionStatus']),
+        _$TransactionStatusEnumMap,
+        json['transactionStatus'],
+      ),
       redirectUrl: json['redirectUrl'] as String?,
     );
 
-Map<String, dynamic> _$$_TransactionResponseToJson(
-    _$_TransactionResponse instance) {
-  final val = <String, dynamic>{
-    'referenceNumber': instance.referenceNumber,
-    'pollUrl': instance.pollUrl,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('transactionStatus',
-      _$TransactionStatusEnumMap[instance.transactionStatus]);
-  writeNotNull('redirectUrl', instance.redirectUrl);
-  return val;
-}
+Map<String, dynamic> _$TransactionResponseToJson(
+  _TransactionResponse instance,
+) => <String, dynamic>{
+  'referenceNumber': instance.referenceNumber,
+  'pollUrl': ?instance.pollUrl,
+  'transactionStatus': ?_$TransactionStatusEnumMap[instance.transactionStatus],
+  'redirectUrl': ?instance.redirectUrl,
+};
 
 const _$TransactionStatusEnumMap = {
   TransactionStatus.authorizationFailed: 'AUTHORIZATION_FAILED',
